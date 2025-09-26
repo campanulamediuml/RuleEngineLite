@@ -83,14 +83,14 @@ class RuleEngine:
     def __or_expr(self):
         node = self.__and_expr()
         while self.__curtype() == 'OR':
-            op = self.__consume('OR')[1]
+            _ = self.__consume('OR')[1]
             node = ('or', node, self.__and_expr())
         return node
 
     def __and_expr(self):
         node = self.__cmp_expr()
         while self.__curtype() == 'AND':
-            op = self.__consume('AND')[1]
+            _ = self.__consume('AND')[1]
             node = ('and', node, self.__cmp_expr())
         return node
 
