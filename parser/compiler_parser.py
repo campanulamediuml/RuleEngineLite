@@ -109,17 +109,17 @@ class RuleEngine:
         return node
 
     def __mul_expr(self):
-        node = self._unary_expr()
+        node = self.__unary_expr()
         while self.__curtype() == 'OP' and self.tokens[self.pos][1] in '*/%':
             op = self.__consume('OP')[1]
-            node = ('bin', op, node, self._unary_expr())
+            node = ('bin', op, node, self.__unary_expr())
         # print(node)
         return node
 
-    def _unary_expr(self):
+    def __unary_expr(self):
         if self.__curtype() == 'OP' and self.tokens[self.pos][1] in '!-':
             op = self.__consume('OP')[1]
-            return ('una', op, self._unary_expr())
+            return ('una', op, self.__unary_expr())
         if self.__curtype() == 'NUM':
             return ('num', self.__consume('NUM')[1])
         if self.__curtype() == 'VAR':
